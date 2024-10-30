@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #483285; /* Background color */
+            font-family: 'Parisienne', cursive;
+            margin: 0;
+            padding: 20px;
+            color: white; /* Letter color */
+            overflow: hidden; /* Hide scrollbars */
+        }
+        #letter {
+            font-size: 24px;
+            line-height: 1.5;
+            text-align: center;
+            position: relative; /* For positioning child elements */
+            width: 100%; /* Full width */
+        }
+        .line {
+            opacity: 0;
+            position: absolute; /* Overlay lines */
+            width: 100%; /* Full width for centering */
+            transition: opacity 0.5s ease;
+        }
+        .line.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div id="letter"></div>
+
+<script>
+    const letter = [
+        "Moj dragi,",
+        "Od trenutka kada smo se sreli, sve se promenilo.",
+        "Znao sam da u tebi ima nešto posebno, nešto što me privlači kao magnet.",
+        "Tvoj osmeh osvetljava moje najtamnije dane,",
+        "a tvoj smeh je moja omiljena melodija koja mi donosi sreću.",
+        "Svaki trenutak proveden s tobom postaje dragocena uspomena,",
+        "a svaki razgovor, bez obzira koliko kratak, ostavlja me sa osmehom.",
+        "Cenim tvoju snagu, tvoju dobrotu i sve ono što te čini jedinstvenim.",
+        "Ti si moj oslonac i moja inspiracija,",
+        "a bez tebe, život bi bio mnogo siromašniji.",
+        "Zamišljam naše buduće trenutke,",
+        "putovanja koja ćemo zajedno doživeti,",
+        "i sve smešne situacije koje će nas povezati još više.",
+        "Zamislite kako zajedno otkrivamo nove horizonte,",
+        "delimo smeh i ljubav na svakom koraku.",
+        "Uvek ću se truditi da te usrećim,",
+        "da ti pružim sve što ti srce poželi,",
+        "jer zaslužuješ samo najbolje.",
+        "Uvek ću biti uz tebe,",
+        "u dobrim i lošim trenucima,",
+        "jer ti si moja sreća.",
+        "Sa svojom ljubavlju,",
+        "Tvoj zauvek."
+    ];
+
+    const letterDiv = document.getElementById('letter');
+
+    let lineIndex = 0;
+
+    function displayLine() {
+        if (lineIndex < letter.length) {
+            const lineDiv = document.createElement('div');
+            lineDiv.className = 'line';
+            lineDiv.innerText = letter[lineIndex];
+            letterDiv.appendChild(lineDiv);
+
+            // Trigger a fade-in effect
+            setTimeout(() => {
+                lineDiv.classList.add('visible');
+            }, 100); // Small delay before adding the visible class
+
+            // Calculate delay based on line length
+            const lineLength = letter[lineIndex].length;
+            const delay = lineLength > 60 ? 6000 : (lineLength > 30 ? 4000 : 3000); // Adjust these values as needed
+
+            // Fade out the current line before fading in the next one
+            setTimeout(() => {
+                lineDiv.classList.remove('visible');
+            }, delay - 1000); // Start fading out before the delay ends
+
+            lineIndex++;
+            setTimeout(displayLine, delay); // Use dynamic delay based on line length
+        } else {
+            // Redirect after the last line is displayed
+            setTimeout(() => {
+                window.location.href = "https://vuk1123.github.io/testt/";
+            }, 2000); // Adjust delay before redirect if needed
+        }
+    }
+
+    // Add a longer delay before starting to display the letter
+    setTimeout(displayLine, 6000); // Change 6000 to desired delay in milliseconds
+
+</script>
+
+</body>
+</html>
